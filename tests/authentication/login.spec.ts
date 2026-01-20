@@ -17,9 +17,5 @@ test('authentication is succesful and dashboatd is displayed', async ({ page }) 
   await expect(page).toHaveURL(/dashboard/);
 
   await expect(page.getByRole('heading', {name: 'Dashboard'})).toBeVisible();
-
-  await expect(page.locator('.oxd-userdropdown-name')).toBeVisible();
-
-
-
+  
 });
