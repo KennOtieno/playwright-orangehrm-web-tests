@@ -22,5 +22,5 @@ test('User is logged out', async ({page}) => {
     const logoutButton = await page.getByRole('menuitem', {name: 'Logout'});
     await logoutButton.click();
 
-    await expect(page).toHaveURL(/login/);
+    await expect(page.getByRole('button', {name: 'Login'})).toBeVisible();
 });
