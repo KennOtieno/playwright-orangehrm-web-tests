@@ -38,3 +38,22 @@ test('Invalid credential', async ({page}) => {
 
 
 });
+
+// Login with empty credentials
+test('Empty credentials', async ({page}) => {
+  page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+
+  const username = await page.getByPlaceholder('Username');
+  const password = await page.getByPlaceholder('Password');
+  const loginButton = await page.getByRole('button', {name: 'Login'});
+
+  // They need to be empty
+  await username.fill('');
+  await password.fill('');
+  await loginButton.click();
+
+  await expect(page.getByText('Required')).toBeVisible;
+  await expect(page).toHaveURL(/login/);
+
+
+});
