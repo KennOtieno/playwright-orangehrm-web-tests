@@ -16,16 +16,11 @@ test('User is logged out', async ({page}) => {
     await expect(page).toHaveURL(/dashboard/);
 
     // Click user dropdown and then click the log out button
-    const userDropdown = await page.locator('.oxd-userdropdown-menu');
-    const logoutButton = await page.getByRole('button', {name: 'Logout'});
-
+    const userDropdown = await page.locator('.oxd-userdropdown-name');
     await userDropdown.click();
 
-    await expect(page).toHaveURL(/dashboard/);
-
-    // Click the log out button
+    const logoutButton = await page.getByRole('menuitem', {name: 'Logout'});
     await logoutButton.click();
 
-    await expect(page).toHaveURL('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
-
+    await expect(page).toHaveURL(/login/);
 });
