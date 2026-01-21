@@ -19,3 +19,22 @@ test('authentication is succesful and dashboatd is displayed', async ({ page }) 
   await expect(page.getByRole('heading', {name: 'Dashboard'})).toBeVisible();
   
 });
+
+// Login with invalid credetintials
+test('Invalid credential', async ({page}) => {
+  await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+
+  const username = page.getByPlaceholder('Username');
+  const password = page.getByPlaceholder('Password');
+  const loginButton = page.getByRole('button', {name: 'Login'});
+
+  // Fill in with valid username and Invalid password
+  await username.fill('Admin');
+  await password.fill('ADMIN123');
+  await loginButton.click();
+
+  await expect(page).toHaveURL(/login/);
+  await expect(page.getByTestId('error-message')).toContainText('Invalid Credentials');
+
+
+});
