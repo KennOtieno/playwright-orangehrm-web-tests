@@ -55,5 +55,4 @@ test('Empty credentials', async ({page}) => {
   await expect(page.getByText('Required')).toBeVisible;
   await expect(page).toHaveURL(/login/);
 
-
 });
