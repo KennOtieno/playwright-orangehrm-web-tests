@@ -34,7 +34,7 @@ test('Invalid credential', async ({page}) => {
   await loginButton.click();
 
   await expect(page).toHaveURL(/login/);
-  await expect(page.getByTestId('error-message')).toContainText('Invalid Credentials');
+  await expect(page.getByText('Invalid Credentials')).toBeVisible();
 
 
 });
