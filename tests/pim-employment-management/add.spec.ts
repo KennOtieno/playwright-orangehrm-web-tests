@@ -3,17 +3,17 @@ import { loginPage } from '../../pages/login.pages';
 
 test('Employee details is creaated & displayed successfully ', async ({page}) => {
     const LoginPage = new loginPage(page);
-    LoginPage.goto();
-    LoginPage.login('Admin', 'admin123');
+    await LoginPage.goto();
+    await LoginPage.login('Admin', 'admin123');
 
-    await expect(page).toHaveURL('/dashboard/');
+    await expect(page).toHaveURL(/dashboard/);
 
 
     // Going to PIM
-    await page.getByRole('list', {name: 'PIM'}).click();
+    await page.getByRole('link', {name: 'PIM'}).click();
 
     // Clicking on add 
-    await page.getByRole('button', {name: '+Add'}).click();
+    await page.getByRole('button', {name: 'Add'}).click();
 
     // Fill employee details
     await page.getByPlaceholder('First Name').fill('Biggie');
