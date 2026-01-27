@@ -12,20 +12,24 @@ test('Employee details is creaated & displayed successfully ', async ({page}) =>
     // Going to PIM
     await page.getByRole('link', {name: 'PIM'}).click();
 
+    await expect(page.getByRole('heading', {name: 'Employee Information'})).toBeVisible();
+
     // Clicking on add 
-    await page.getByRole('button', {name: 'Add'}).click();
+    const addButton = await page.getByRole('button', {name: 'Add'});
+    await expect(addButton).toBeVisible();
+    await addButton.click();
 
     // Fill employee details
-    await page.getByPlaceholder('First Name').fill('Biggie');
+    const firstName = await page.getByPlaceholder('First Name');
+    await expect(firstName).toBeVisible();
+    await firstName.fill('Biggie');
     await page.getByPlaceholder('Last Name').fill('Smalls');
 
     await page.getByRole('button', {name: 'Save'}).click();
 
     // Expected Results
     await expect(page).toHaveURL(/viewPersonalDetails/);
-    await expect(page.getByRole('heading', {name: 'Personal Details'})).toBeVisible();
+    await expect(page.getByText('Personal Details')).toBeVisible();
 
-
-    
 
 });
