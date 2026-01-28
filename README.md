@@ -54,6 +54,6 @@ While automating the **Add Employee** flow, several challenges were encountered:
   - Visibility of key UI elements
 - Introduced explicit checks for rendered content instead of navigation timing
 
-These challenges reflect **real-world enterprise application behavior**, where UI state—not navigation—is the true indicator of success.
+These challenges reflect **real world enterprise application behavior**, where UI state—not navigation—is the true indicator of success.
 
-## Project Structure
+
