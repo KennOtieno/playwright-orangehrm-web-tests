@@ -4,14 +4,9 @@ test('authentication is succesful and dashboatd is displayed', async ({ page }) 
   await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
 
   // Input valid username and password then press login buttp
-  const username = await page.getByPlaceholder('Username');
-  const password = await page.getByPlaceholder('Password');
-  const loginButton = await page.getByRole('button', {name: 'Login'});
-
-  // Next step is to fill them up
-  await username.fill('Admin');
-  await password.fill('admin123');
-  await loginButton.click();
+  await page.getByPlaceholder('Username').fill(process.env.TEST_USERNAME!);
+  await page.getByPlaceholder('Password').fill(process.env.TEST_PASSWORD!);
+  await page.getByRole('button', {name: 'Login'}).click();
 
 // If it has this, it's a pass
   await expect(page).toHaveURL(/dashboard/);
@@ -24,18 +19,12 @@ test('authentication is succesful and dashboatd is displayed', async ({ page }) 
 test('Invalid credential', async ({page}) => {
   await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
 
-  const username = page.getByPlaceholder('Username');
-  const password = page.getByPlaceholder('Password');
-  const loginButton = page.getByRole('button', {name: 'Login'});
-
-  // Fill in with valid username and Invalid password
-  await username.fill('Admin');
-  await password.fill('ADMIN123');
-  await loginButton.click();
+  await page.getByPlaceholder('Username').fill(process.env.TEST_USERNAME!);
+  await page.getByPlaceholder('Password').fill(process.env.TEST_INVALID_PASSWORD);
+  await page.getByRole('button', {name: 'Login'}).click();
 
   await expect(page).toHaveURL(/login/);
   await expect(page.getByText('Invalid Credentials')).toBeVisible();
-
 
 });
 
@@ -43,14 +32,9 @@ test('Invalid credential', async ({page}) => {
 test('Empty credentials', async ({page}) => {
   page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
 
-  const username = await page.getByPlaceholder('Username');
-  const password = await page.getByPlaceholder('Password');
-  const loginButton = await page.getByRole('button', {name: 'Login'});
-
-  // They need to be empty
-  await username.fill('');
-  await password.fill('');
-  await loginButton.click();
+  await page.getByPlaceholder('Username').fill('');
+  await page.getByPlaceholder('Password').fill('');
+  await page.getByRole('button', {name: 'Login'}).click();
 
   await expect(page.getByText('Required')).toBeVisible;
   await expect(page).toHaveURL(/login/);
